@@ -1,0 +1,24 @@
+{
+  "overview": "A Bengali-language reseller service portal (RESELPONNO / RESELLER BD) with a green-branded header, promotional banner, social media links, notice board, and a 30-button service grid. All buttons are interactive with placeholder modals, and the app features a 4-tab bottom navigation.",
+  "features": [
+    "Green header with hamburger menu and balance button",
+    "Red promotional cashback banner with carousel",
+    "Social media links card (Facebook, YouTube, Telegram)",
+    "Important notice section with details link",
+    "30-button service grid in 5x6 layout - all interactive",
+    "Bottom navigation with 4 tabs",
+    "Service modals with Bengali placeholder content",
+    "Mobile-first responsive layout",
+    "Bengali text throughout"
+  ],
+  "category": "business",
+  "tags": [
+    "bengali",
+    "reseller",
+    "marketplace",
+    "ecommerce",
+    "mobile-first",
+    "bangladesh"
+  ],
+  "last_updated": "2026-05-11T17:20:23.752Z"
+}

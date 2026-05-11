@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Satoshi", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 0.75rem;
+
+    /* Light mode: white background, professional palette */
+    --background: 0.99 0.002 0;
+    --foreground: 0.15 0.008 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0.008 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0.008 0;
+
+    /* Primary: Green #2e7d32 → OKLCH(0.52 0.18 145) */
+    --primary: 0.52 0.18 145;
+    --primary-foreground: 0.98 0.002 0;
+
+    /* Secondary: Muted green */
+    --secondary: 0.92 0.008 145;
+    --secondary-foreground: 0.25 0.01 145;
+    --muted: 0.94 0.005 0;
+    --muted-foreground: 0.5 0.005 0;
+
+    /* Accent: Red #c0392b → OKLCH(0.48 0.22 20) */
+    --accent: 0.48 0.22 20;
+    --accent-foreground: 0.98 0.002 0;
+
+    /* Destructive: same as accent red */
+    --destructive: 0.48 0.22 20;
+    --destructive-foreground: 0.98 0.002 0;
+
+    /* Borders and inputs */
+    --border: 0.92 0.004 0;
+    --input: 0.94 0.004 0;
+    --ring: 0.52 0.18 145;
+
+    /* Chart colors */
+    --chart-1: 0.52 0.18 145;
+    --chart-2: 0.48 0.22 20;
+    --chart-3: 0.65 0.15 85;
+    --chart-4: 0.6 0.12 40;
+    --chart-5: 0.55 0.1 175;
+
+    /* Sidebar (green-tinted) */
+    --sidebar: 0.96 0.004 145;
+    --sidebar-foreground: 0.15 0.008 0;
+    --sidebar-primary: 0.52 0.18 145;
+    --sidebar-primary-foreground: 0.98 0.002 0;
+    --sidebar-accent: 0.92 0.008 145;
+    --sidebar-accent-foreground: 0.25 0.01 145;
+    --sidebar-border: 0.9 0.005 145;
+    --sidebar-ring: 0.52 0.18 145;
+  }
+
+  .dark {
+    /* Dark mode: not implemented, light-only for Bengali B2B */
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .shadow-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+}
