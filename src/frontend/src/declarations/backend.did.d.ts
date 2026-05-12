@@ -10,7 +10,161 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE {}
+export interface BalanceTransaction {
+  'createdAt' : Timestamp,
+  'description' : string,
+  'amount' : bigint,
+}
+export type CategoryFilter = { 'all' : null } |
+  { 'fashion' : null } |
+  { 'electronics' : null };
+export interface JobNotice {
+  'id' : JobNoticeId,
+  'title' : string,
+  'salary' : string,
+  'description' : string,
+  'deadline' : string,
+  'isActive' : boolean,
+  'company' : string,
+  'location' : string,
+}
+export type JobNoticeId = bigint;
+export interface MobileRecharge {
+  'id' : RechargeId,
+  'status' : RechargeStatus,
+  'operator' : RechargeOperator,
+  'createdAt' : Timestamp,
+  'phone' : string,
+  'amount' : bigint,
+}
+export interface Order {
+  'id' : OrderId,
+  'customerName' : string,
+  'status' : OrderStatus,
+  'customerPhone' : string,
+  'createdAt' : Timestamp,
+  'size' : string,
+  'productId' : ProductId,
+  'customerAddress' : string,
+  'resellerId' : ResellerId,
+  'quantity' : bigint,
+  'totalPrice' : bigint,
+  'location' : string,
+}
+export type OrderId = bigint;
+export type OrderStatus = { 'shipped' : null } |
+  { 'cancelled' : null } |
+  { 'pending' : null } |
+  { 'delivered' : null } |
+  { 'confirmed' : null };
+export interface Product {
+  'id' : ProductId,
+  'originalPrice' : bigint,
+  'resellerPrice' : bigint,
+  'name' : string,
+  'description' : string,
+  'isActive' : boolean,
+  'imageEmoji' : string,
+  'sizes' : Array<string>,
+  'stock' : bigint,
+  'category' : ProductCategory,
+}
+export type ProductCategory = { 'fashion' : null } |
+  { 'electronics' : null };
+export type ProductId = bigint;
+export type RechargeId = bigint;
+export type RechargeOperator = { 'banglalink' : null } |
+  { 'grameenphone' : null } |
+  { 'robi' : null } |
+  { 'airtel' : null } |
+  { 'teletalk' : null };
+export type RechargeStatus = { 'pending' : null } |
+  { 'completed' : null } |
+  { 'failed' : null };
+export interface Reseller {
+  'id' : ResellerId,
+  'totalOrders' : bigint,
+  'name' : string,
+  'joinedAt' : Timestamp,
+  'isActive' : boolean,
+  'email' : string,
+  'address' : string,
+  'totalEarnings' : bigint,
+  'phone' : string,
+}
+export interface ResellerBalance {
+  'balance' : bigint,
+  'resellerId' : ResellerId,
+  'transactions' : Array<BalanceTransaction>,
+}
+export type ResellerId = bigint;
+export type Timestamp = bigint;
+export interface _SERVICE {
+  'adminAddJobNotice' : ActorMethod<
+    [string, string, string, string, string, string, string],
+    JobNotice
+  >,
+  'adminAddProduct' : ActorMethod<
+    [
+      string,
+      string,
+      ProductCategory,
+      bigint,
+      bigint,
+      Array<string>,
+      bigint,
+      string,
+      string,
+    ],
+    Product
+  >,
+  'adminDeactivateJobNotice' : ActorMethod<[string, JobNoticeId], boolean>,
+  'adminDeleteProduct' : ActorMethod<[string, ProductId], boolean>,
+  'adminEditProduct' : ActorMethod<
+    [
+      string,
+      ProductId,
+      string,
+      ProductCategory,
+      bigint,
+      bigint,
+      Array<string>,
+      bigint,
+      string,
+      string,
+      boolean,
+    ],
+    boolean
+  >,
+  'adminGetAllOrders' : ActorMethod<[string], Array<Order>>,
+  'adminGetAllRecharges' : ActorMethod<[string], Array<MobileRecharge>>,
+  'adminGetAllResellers' : ActorMethod<[string], Array<Reseller>>,
+  'adminLogin' : ActorMethod<[string], boolean>,
+  'adminUpdateOrderStatus' : ActorMethod<
+    [string, OrderId, OrderStatus],
+    boolean
+  >,
+  'createResellerAccount' : ActorMethod<
+    [string, string, string, string],
+    Reseller
+  >,
+  'getJobNotices' : ActorMethod<[], Array<JobNotice>>,
+  'getOrders' : ActorMethod<[], Array<Order>>,
+  'getOrdersByReseller' : ActorMethod<[ResellerId], Array<Order>>,
+  'getProductById' : ActorMethod<[ProductId], [] | [Product]>,
+  'getProducts' : ActorMethod<[CategoryFilter], Array<Product>>,
+  'getResellerBalance' : ActorMethod<[ResellerId], ResellerBalance>,
+  'getResellerById' : ActorMethod<[ResellerId], [] | [Reseller]>,
+  'placeOrder' : ActorMethod<
+    [string, string, string, string, ProductId, string, bigint, ResellerId],
+    Order
+  >,
+  'searchProducts' : ActorMethod<[string], Array<Product>>,
+  'submitRecharge' : ActorMethod<
+    [string, RechargeOperator, bigint],
+    MobileRecharge
+  >,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;

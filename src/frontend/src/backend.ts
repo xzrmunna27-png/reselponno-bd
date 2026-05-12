@@ -89,10 +89,689 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface backendInterface {
+export interface ResellerBalance {
+    balance: bigint;
+    resellerId: ResellerId;
+    transactions: Array<BalanceTransaction>;
 }
+export type Timestamp = bigint;
+export interface BalanceTransaction {
+    createdAt: Timestamp;
+    description: string;
+    amount: bigint;
+}
+export interface Reseller {
+    id: ResellerId;
+    totalOrders: bigint;
+    name: string;
+    joinedAt: Timestamp;
+    isActive: boolean;
+    email: string;
+    address: string;
+    totalEarnings: bigint;
+    phone: string;
+}
+export interface Order {
+    id: OrderId;
+    customerName: string;
+    status: OrderStatus;
+    customerPhone: string;
+    createdAt: Timestamp;
+    size: string;
+    productId: ProductId;
+    customerAddress: string;
+    resellerId: ResellerId;
+    quantity: bigint;
+    totalPrice: bigint;
+    location: string;
+}
+export type RechargeId = bigint;
+export type ResellerId = bigint;
+export interface MobileRecharge {
+    id: RechargeId;
+    status: RechargeStatus;
+    operator: RechargeOperator;
+    createdAt: Timestamp;
+    phone: string;
+    amount: bigint;
+}
+export type ProductId = bigint;
+export type JobNoticeId = bigint;
+export interface JobNotice {
+    id: JobNoticeId;
+    title: string;
+    salary: string;
+    description: string;
+    deadline: string;
+    isActive: boolean;
+    company: string;
+    location: string;
+}
+export interface Product {
+    id: ProductId;
+    originalPrice: bigint;
+    resellerPrice: bigint;
+    name: string;
+    description: string;
+    isActive: boolean;
+    imageEmoji: string;
+    sizes: Array<string>;
+    stock: bigint;
+    category: ProductCategory;
+}
+export type OrderId = bigint;
+export enum CategoryFilter {
+    all = "all",
+    fashion = "fashion",
+    electronics = "electronics"
+}
+export enum OrderStatus {
+    shipped = "shipped",
+    cancelled = "cancelled",
+    pending = "pending",
+    delivered = "delivered",
+    confirmed = "confirmed"
+}
+export enum ProductCategory {
+    fashion = "fashion",
+    electronics = "electronics"
+}
+export enum RechargeOperator {
+    banglalink = "banglalink",
+    grameenphone = "grameenphone",
+    robi = "robi",
+    airtel = "airtel",
+    teletalk = "teletalk"
+}
+export enum RechargeStatus {
+    pending = "pending",
+    completed = "completed",
+    failed = "failed"
+}
+export interface backendInterface {
+    adminAddJobNotice(adminPassword: string, title: string, company: string, description: string, deadline: string, salary: string, location: string): Promise<JobNotice>;
+    adminAddProduct(adminPassword: string, name: string, category: ProductCategory, originalPrice: bigint, resellerPrice: bigint, sizes: Array<string>, stock: bigint, description: string, imageEmoji: string): Promise<Product>;
+    adminDeactivateJobNotice(adminPassword: string, id: JobNoticeId): Promise<boolean>;
+    adminDeleteProduct(adminPassword: string, id: ProductId): Promise<boolean>;
+    adminEditProduct(adminPassword: string, id: ProductId, name: string, category: ProductCategory, originalPrice: bigint, resellerPrice: bigint, sizes: Array<string>, stock: bigint, description: string, imageEmoji: string, isActive: boolean): Promise<boolean>;
+    adminGetAllOrders(adminPassword: string): Promise<Array<Order>>;
+    adminGetAllRecharges(adminPassword: string): Promise<Array<MobileRecharge>>;
+    adminGetAllResellers(adminPassword: string): Promise<Array<Reseller>>;
+    adminLogin(password: string): Promise<boolean>;
+    adminUpdateOrderStatus(adminPassword: string, id: OrderId, status: OrderStatus): Promise<boolean>;
+    createResellerAccount(name: string, phone: string, email: string, address: string): Promise<Reseller>;
+    getJobNotices(): Promise<Array<JobNotice>>;
+    getOrders(): Promise<Array<Order>>;
+    getOrdersByReseller(resellerId: ResellerId): Promise<Array<Order>>;
+    getProductById(id: ProductId): Promise<Product | null>;
+    getProducts(categoryFilter: CategoryFilter): Promise<Array<Product>>;
+    getResellerBalance(resellerId: ResellerId): Promise<ResellerBalance>;
+    getResellerById(id: ResellerId): Promise<Reseller | null>;
+    placeOrder(customerName: string, customerPhone: string, customerAddress: string, location: string, productId: ProductId, size: string, quantity: bigint, resellerId: ResellerId): Promise<Order>;
+    searchProducts(term: string): Promise<Array<Product>>;
+    submitRecharge(phone: string, operator: RechargeOperator, amount: bigint): Promise<MobileRecharge>;
+}
+import type { CategoryFilter as _CategoryFilter, MobileRecharge as _MobileRecharge, Order as _Order, OrderId as _OrderId, OrderStatus as _OrderStatus, Product as _Product, ProductCategory as _ProductCategory, ProductId as _ProductId, RechargeId as _RechargeId, RechargeOperator as _RechargeOperator, RechargeStatus as _RechargeStatus, Reseller as _Reseller, ResellerId as _ResellerId, Timestamp as _Timestamp } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async adminAddJobNotice(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string): Promise<JobNotice> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminAddJobNotice(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminAddJobNotice(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+            return result;
+        }
+    }
+    async adminAddProduct(arg0: string, arg1: string, arg2: ProductCategory, arg3: bigint, arg4: bigint, arg5: Array<string>, arg6: bigint, arg7: string, arg8: string): Promise<Product> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminAddProduct(arg0, arg1, to_candid_ProductCategory_n1(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, arg8);
+                return from_candid_Product_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminAddProduct(arg0, arg1, to_candid_ProductCategory_n1(this._uploadFile, this._downloadFile, arg2), arg3, arg4, arg5, arg6, arg7, arg8);
+            return from_candid_Product_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async adminDeactivateJobNotice(arg0: string, arg1: JobNoticeId): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminDeactivateJobNotice(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminDeactivateJobNotice(arg0, arg1);
+            return result;
+        }
+    }
+    async adminDeleteProduct(arg0: string, arg1: ProductId): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminDeleteProduct(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminDeleteProduct(arg0, arg1);
+            return result;
+        }
+    }
+    async adminEditProduct(arg0: string, arg1: ProductId, arg2: string, arg3: ProductCategory, arg4: bigint, arg5: bigint, arg6: Array<string>, arg7: bigint, arg8: string, arg9: string, arg10: boolean): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminEditProduct(arg0, arg1, arg2, to_candid_ProductCategory_n1(this._uploadFile, this._downloadFile, arg3), arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminEditProduct(arg0, arg1, arg2, to_candid_ProductCategory_n1(this._uploadFile, this._downloadFile, arg3), arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+            return result;
+        }
+    }
+    async adminGetAllOrders(arg0: string): Promise<Array<Order>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminGetAllOrders(arg0);
+                return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminGetAllOrders(arg0);
+            return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async adminGetAllRecharges(arg0: string): Promise<Array<MobileRecharge>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminGetAllRecharges(arg0);
+                return from_candid_vec_n12(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminGetAllRecharges(arg0);
+            return from_candid_vec_n12(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async adminGetAllResellers(arg0: string): Promise<Array<Reseller>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminGetAllResellers(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminGetAllResellers(arg0);
+            return result;
+        }
+    }
+    async adminLogin(arg0: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminLogin(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminLogin(arg0);
+            return result;
+        }
+    }
+    async adminUpdateOrderStatus(arg0: string, arg1: OrderId, arg2: OrderStatus): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.adminUpdateOrderStatus(arg0, arg1, to_candid_OrderStatus_n19(this._uploadFile, this._downloadFile, arg2));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.adminUpdateOrderStatus(arg0, arg1, to_candid_OrderStatus_n19(this._uploadFile, this._downloadFile, arg2));
+            return result;
+        }
+    }
+    async createResellerAccount(arg0: string, arg1: string, arg2: string, arg3: string): Promise<Reseller> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.createResellerAccount(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.createResellerAccount(arg0, arg1, arg2, arg3);
+            return result;
+        }
+    }
+    async getJobNotices(): Promise<Array<JobNotice>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getJobNotices();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getJobNotices();
+            return result;
+        }
+    }
+    async getOrders(): Promise<Array<Order>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getOrders();
+                return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getOrders();
+            return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getOrdersByReseller(arg0: ResellerId): Promise<Array<Order>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getOrdersByReseller(arg0);
+                return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getOrdersByReseller(arg0);
+            return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getProductById(arg0: ProductId): Promise<Product | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getProductById(arg0);
+                return from_candid_opt_n21(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getProductById(arg0);
+            return from_candid_opt_n21(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getProducts(arg0: CategoryFilter): Promise<Array<Product>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getProducts(to_candid_CategoryFilter_n22(this._uploadFile, this._downloadFile, arg0));
+                return from_candid_vec_n24(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getProducts(to_candid_CategoryFilter_n22(this._uploadFile, this._downloadFile, arg0));
+            return from_candid_vec_n24(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getResellerBalance(arg0: ResellerId): Promise<ResellerBalance> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getResellerBalance(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getResellerBalance(arg0);
+            return result;
+        }
+    }
+    async getResellerById(arg0: ResellerId): Promise<Reseller | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getResellerById(arg0);
+                return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getResellerById(arg0);
+            return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async placeOrder(arg0: string, arg1: string, arg2: string, arg3: string, arg4: ProductId, arg5: string, arg6: bigint, arg7: ResellerId): Promise<Order> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.placeOrder(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                return from_candid_Order_n8(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.placeOrder(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+            return from_candid_Order_n8(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async searchProducts(arg0: string): Promise<Array<Product>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.searchProducts(arg0);
+                return from_candid_vec_n24(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.searchProducts(arg0);
+            return from_candid_vec_n24(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async submitRecharge(arg0: string, arg1: RechargeOperator, arg2: bigint): Promise<MobileRecharge> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitRecharge(arg0, to_candid_RechargeOperator_n26(this._uploadFile, this._downloadFile, arg1), arg2);
+                return from_candid_MobileRecharge_n13(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitRecharge(arg0, to_candid_RechargeOperator_n26(this._uploadFile, this._downloadFile, arg1), arg2);
+            return from_candid_MobileRecharge_n13(this._uploadFile, this._downloadFile, result);
+        }
+    }
+}
+function from_candid_MobileRecharge_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _MobileRecharge): MobileRecharge {
+    return from_candid_record_n14(_uploadFile, _downloadFile, value);
+}
+function from_candid_OrderStatus_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _OrderStatus): OrderStatus {
+    return from_candid_variant_n11(_uploadFile, _downloadFile, value);
+}
+function from_candid_Order_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Order): Order {
+    return from_candid_record_n9(_uploadFile, _downloadFile, value);
+}
+function from_candid_ProductCategory_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _ProductCategory): ProductCategory {
+    return from_candid_variant_n6(_uploadFile, _downloadFile, value);
+}
+function from_candid_Product_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Product): Product {
+    return from_candid_record_n4(_uploadFile, _downloadFile, value);
+}
+function from_candid_RechargeOperator_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _RechargeOperator): RechargeOperator {
+    return from_candid_variant_n18(_uploadFile, _downloadFile, value);
+}
+function from_candid_RechargeStatus_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _RechargeStatus): RechargeStatus {
+    return from_candid_variant_n16(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n21(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Product]): Product | null {
+    return value.length === 0 ? null : from_candid_Product_n3(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n25(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Reseller]): Reseller | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_record_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: _RechargeId;
+    status: _RechargeStatus;
+    operator: _RechargeOperator;
+    createdAt: _Timestamp;
+    phone: string;
+    amount: bigint;
+}): {
+    id: RechargeId;
+    status: RechargeStatus;
+    operator: RechargeOperator;
+    createdAt: Timestamp;
+    phone: string;
+    amount: bigint;
+} {
+    return {
+        id: value.id,
+        status: from_candid_RechargeStatus_n15(_uploadFile, _downloadFile, value.status),
+        operator: from_candid_RechargeOperator_n17(_uploadFile, _downloadFile, value.operator),
+        createdAt: value.createdAt,
+        phone: value.phone,
+        amount: value.amount
+    };
+}
+function from_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: _ProductId;
+    originalPrice: bigint;
+    resellerPrice: bigint;
+    name: string;
+    description: string;
+    isActive: boolean;
+    imageEmoji: string;
+    sizes: Array<string>;
+    stock: bigint;
+    category: _ProductCategory;
+}): {
+    id: ProductId;
+    originalPrice: bigint;
+    resellerPrice: bigint;
+    name: string;
+    description: string;
+    isActive: boolean;
+    imageEmoji: string;
+    sizes: Array<string>;
+    stock: bigint;
+    category: ProductCategory;
+} {
+    return {
+        id: value.id,
+        originalPrice: value.originalPrice,
+        resellerPrice: value.resellerPrice,
+        name: value.name,
+        description: value.description,
+        isActive: value.isActive,
+        imageEmoji: value.imageEmoji,
+        sizes: value.sizes,
+        stock: value.stock,
+        category: from_candid_ProductCategory_n5(_uploadFile, _downloadFile, value.category)
+    };
+}
+function from_candid_record_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: _OrderId;
+    customerName: string;
+    status: _OrderStatus;
+    customerPhone: string;
+    createdAt: _Timestamp;
+    size: string;
+    productId: _ProductId;
+    customerAddress: string;
+    resellerId: _ResellerId;
+    quantity: bigint;
+    totalPrice: bigint;
+    location: string;
+}): {
+    id: OrderId;
+    customerName: string;
+    status: OrderStatus;
+    customerPhone: string;
+    createdAt: Timestamp;
+    size: string;
+    productId: ProductId;
+    customerAddress: string;
+    resellerId: ResellerId;
+    quantity: bigint;
+    totalPrice: bigint;
+    location: string;
+} {
+    return {
+        id: value.id,
+        customerName: value.customerName,
+        status: from_candid_OrderStatus_n10(_uploadFile, _downloadFile, value.status),
+        customerPhone: value.customerPhone,
+        createdAt: value.createdAt,
+        size: value.size,
+        productId: value.productId,
+        customerAddress: value.customerAddress,
+        resellerId: value.resellerId,
+        quantity: value.quantity,
+        totalPrice: value.totalPrice,
+        location: value.location
+    };
+}
+function from_candid_variant_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    shipped: null;
+} | {
+    cancelled: null;
+} | {
+    pending: null;
+} | {
+    delivered: null;
+} | {
+    confirmed: null;
+}): OrderStatus {
+    return "shipped" in value ? OrderStatus.shipped : "cancelled" in value ? OrderStatus.cancelled : "pending" in value ? OrderStatus.pending : "delivered" in value ? OrderStatus.delivered : "confirmed" in value ? OrderStatus.confirmed : value;
+}
+function from_candid_variant_n16(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    pending: null;
+} | {
+    completed: null;
+} | {
+    failed: null;
+}): RechargeStatus {
+    return "pending" in value ? RechargeStatus.pending : "completed" in value ? RechargeStatus.completed : "failed" in value ? RechargeStatus.failed : value;
+}
+function from_candid_variant_n18(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    banglalink: null;
+} | {
+    grameenphone: null;
+} | {
+    robi: null;
+} | {
+    airtel: null;
+} | {
+    teletalk: null;
+}): RechargeOperator {
+    return "banglalink" in value ? RechargeOperator.banglalink : "grameenphone" in value ? RechargeOperator.grameenphone : "robi" in value ? RechargeOperator.robi : "airtel" in value ? RechargeOperator.airtel : "teletalk" in value ? RechargeOperator.teletalk : value;
+}
+function from_candid_variant_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    fashion: null;
+} | {
+    electronics: null;
+}): ProductCategory {
+    return "fashion" in value ? ProductCategory.fashion : "electronics" in value ? ProductCategory.electronics : value;
+}
+function from_candid_vec_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_MobileRecharge>): Array<MobileRecharge> {
+    return value.map((x)=>from_candid_MobileRecharge_n13(_uploadFile, _downloadFile, x));
+}
+function from_candid_vec_n24(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Product>): Array<Product> {
+    return value.map((x)=>from_candid_Product_n3(_uploadFile, _downloadFile, x));
+}
+function from_candid_vec_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Order>): Array<Order> {
+    return value.map((x)=>from_candid_Order_n8(_uploadFile, _downloadFile, x));
+}
+function to_candid_CategoryFilter_n22(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: CategoryFilter): _CategoryFilter {
+    return to_candid_variant_n23(_uploadFile, _downloadFile, value);
+}
+function to_candid_OrderStatus_n19(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: OrderStatus): _OrderStatus {
+    return to_candid_variant_n20(_uploadFile, _downloadFile, value);
+}
+function to_candid_ProductCategory_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ProductCategory): _ProductCategory {
+    return to_candid_variant_n2(_uploadFile, _downloadFile, value);
+}
+function to_candid_RechargeOperator_n26(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: RechargeOperator): _RechargeOperator {
+    return to_candid_variant_n27(_uploadFile, _downloadFile, value);
+}
+function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ProductCategory): {
+    fashion: null;
+} | {
+    electronics: null;
+} {
+    return value == ProductCategory.fashion ? {
+        fashion: null
+    } : value == ProductCategory.electronics ? {
+        electronics: null
+    } : value;
+}
+function to_candid_variant_n20(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: OrderStatus): {
+    shipped: null;
+} | {
+    cancelled: null;
+} | {
+    pending: null;
+} | {
+    delivered: null;
+} | {
+    confirmed: null;
+} {
+    return value == OrderStatus.shipped ? {
+        shipped: null
+    } : value == OrderStatus.cancelled ? {
+        cancelled: null
+    } : value == OrderStatus.pending ? {
+        pending: null
+    } : value == OrderStatus.delivered ? {
+        delivered: null
+    } : value == OrderStatus.confirmed ? {
+        confirmed: null
+    } : value;
+}
+function to_candid_variant_n23(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: CategoryFilter): {
+    all: null;
+} | {
+    fashion: null;
+} | {
+    electronics: null;
+} {
+    return value == CategoryFilter.all ? {
+        all: null
+    } : value == CategoryFilter.fashion ? {
+        fashion: null
+    } : value == CategoryFilter.electronics ? {
+        electronics: null
+    } : value;
+}
+function to_candid_variant_n27(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: RechargeOperator): {
+    banglalink: null;
+} | {
+    grameenphone: null;
+} | {
+    robi: null;
+} | {
+    airtel: null;
+} | {
+    teletalk: null;
+} {
+    return value == RechargeOperator.banglalink ? {
+        banglalink: null
+    } : value == RechargeOperator.grameenphone ? {
+        grameenphone: null
+    } : value == RechargeOperator.robi ? {
+        robi: null
+    } : value == RechargeOperator.airtel ? {
+        airtel: null
+    } : value == RechargeOperator.teletalk ? {
+        teletalk: null
+    } : value;
 }
 export interface CreateActorOptions {
     agent?: Agent;

@@ -1,2 +1,146 @@
+type Timestamp = int;
+type ResellerId = nat;
+type ResellerBalance = 
+ record {
+   balance: int;
+   resellerId: ResellerId;
+   transactions: vec BalanceTransaction;
+ };
+type Reseller = 
+ record {
+   address: text;
+   email: text;
+   id: ResellerId;
+   isActive: bool;
+   joinedAt: Timestamp;
+   name: text;
+   phone: text;
+   totalEarnings: nat;
+   totalOrders: nat;
+ };
+type RechargeStatus = 
+ variant {
+   completed;
+   failed;
+   pending;
+ };
+type RechargeOperator = 
+ variant {
+   airtel;
+   banglalink;
+   grameenphone;
+   robi;
+   teletalk;
+ };
+type RechargeId = nat;
+type ProductId = nat;
+type ProductCategory = 
+ variant {
+   electronics;
+   fashion;
+ };
+type Product = 
+ record {
+   category: ProductCategory;
+   description: text;
+   id: ProductId;
+   imageEmoji: text;
+   isActive: bool;
+   name: text;
+   originalPrice: nat;
+   resellerPrice: nat;
+   sizes: vec text;
+   stock: nat;
+ };
+type OrderStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   delivered;
+   pending;
+   shipped;
+ };
+type OrderId = nat;
+type Order = 
+ record {
+   createdAt: Timestamp;
+   customerAddress: text;
+   customerName: text;
+   customerPhone: text;
+   id: OrderId;
+   location: text;
+   productId: ProductId;
+   quantity: nat;
+   resellerId: ResellerId;
+   size: text;
+   status: OrderStatus;
+   totalPrice: nat;
+ };
+type MobileRecharge = 
+ record {
+   amount: nat;
+   createdAt: Timestamp;
+   id: RechargeId;
+   operator: RechargeOperator;
+   phone: text;
+   status: RechargeStatus;
+ };
+type JobNoticeId = nat;
+type JobNotice = 
+ record {
+   company: text;
+   deadline: text;
+   description: text;
+   id: JobNoticeId;
+   isActive: bool;
+   location: text;
+   salary: text;
+   title: text;
+ };
+type CategoryFilter = 
+ variant {
+   all;
+   electronics;
+   fashion;
+ };
+type BalanceTransaction = 
+ record {
+   amount: int;
+   createdAt: Timestamp;
+   description: text;
+ };
 service : {
+  adminAddJobNotice: (adminPassword: text, title: text, company: text,
+   description: text, deadline: text, salary: text, location: text) ->
+   (JobNotice);
+  adminAddProduct: (adminPassword: text, name: text, category:
+   ProductCategory, originalPrice: nat, resellerPrice: nat, sizes: vec text,
+   stock: nat, description: text, imageEmoji: text) -> (Product);
+  adminDeactivateJobNotice: (adminPassword: text, id: JobNoticeId) -> (bool);
+  adminDeleteProduct: (adminPassword: text, id: ProductId) -> (bool);
+  adminEditProduct: (adminPassword: text, id: ProductId, name: text,
+   category: ProductCategory, originalPrice: nat, resellerPrice: nat, sizes:
+   vec text, stock: nat, description: text, imageEmoji: text, isActive:
+   bool) -> (bool);
+  adminGetAllOrders: (adminPassword: text) -> (vec Order) query;
+  adminGetAllRecharges: (adminPassword: text) -> (vec MobileRecharge) query;
+  adminGetAllResellers: (adminPassword: text) -> (vec Reseller) query;
+  adminLogin: (password: text) -> (bool) query;
+  adminUpdateOrderStatus: (adminPassword: text, id: OrderId, status:
+   OrderStatus) -> (bool);
+  createResellerAccount: (name: text, phone: text, email: text, address:
+   text) -> (Reseller);
+  getJobNotices: () -> (vec JobNotice) query;
+  getOrders: () -> (vec Order) query;
+  getOrdersByReseller: (resellerId: ResellerId) -> (vec Order) query;
+  getProductById: (id: ProductId) -> (opt Product) query;
+  getProducts: (categoryFilter: CategoryFilter) -> (vec Product) query;
+  getResellerBalance: (resellerId: ResellerId) -> (ResellerBalance) query;
+  getResellerById: (id: ResellerId) -> (opt Reseller) query;
+  placeOrder: (customerName: text, customerPhone: text, customerAddress:
+   text, location: text, productId: ProductId, size: text, quantity: 
+   nat, resellerId: ResellerId) -> (Order);
+  searchProducts: (term: text) -> (vec Product) query;
+  submitRecharge: (phone: text, operator: RechargeOperator, amount: nat) ->
+   (MobileRecharge);
 }

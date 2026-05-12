@@ -1,101 +1,301 @@
-import {
-  ArrowUpCircle,
-  Banknote,
-  BarChart2,
-  CalendarDays,
-  CheckCircle,
-  CreditCard,
-  FileText,
-  Globe,
-  Heart,
-  Home,
-  LayoutDashboard,
-  Mail,
-  MapPin,
-  Megaphone,
-  Monitor,
-  MousePointerClick,
-  Package,
-  Percent,
-  Receipt,
-  Search,
-  Shield,
-  ShoppingBag,
-  ShoppingCart,
-  Smartphone,
-  Sparkles,
-  Tag,
-  TrendingUp,
-  UserPlus,
-  Users,
-  Wallet,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
 interface ServiceButton {
   id: number;
   label: string;
-  Icon: LucideIcon;
+  emoji: string;
+  bg: string;
+  action: string;
 }
 
+const COLORS = [
+  "#1b5e20",
+  "#0d47a1",
+  "#e65100",
+  "#4a148c",
+  "#b71c1c",
+  "#00695c",
+  "#880e4f",
+];
+
 const services: ServiceButton[] = [
-  { id: 1, label: "রিসেলিং প্রডাক্ট", Icon: Package },
-  { id: 2, label: "প্রডাক্ট সার্চ", Icon: Search },
-  { id: 3, label: "রিসেলারের ঘর", Icon: Home },
-  { id: 4, label: "ই-কমার্স", Icon: ShoppingBag },
-  { id: 5, label: "নাচিড রেজিস্টার", Icon: UserPlus },
-  { id: 6, label: "ভেরিফাইড প্রডাক্ট", Icon: CheckCircle },
-  { id: 7, label: "মোবাইল রিচার্জ", Icon: Smartphone },
-  { id: 8, label: "নিয়োগ বিজ্ঞপ্তি", Icon: FileText },
-  { id: 9, label: "যাচাই", Icon: Shield },
-  { id: 10, label: "জিমেইল মার্কেটিং", Icon: Mail },
-  { id: 11, label: "নতুন প্রডাক্ট", Icon: Sparkles },
-  { id: 12, label: "ওয়ালেট", Icon: Wallet },
-  { id: 13, label: "ফেভরিট প্রডাক্ট", Icon: Heart },
-  { id: 14, label: "লাভের নিশ্চয়তা", Icon: TrendingUp },
-  { id: 15, label: "উত্তোলন", Icon: ArrowUpCircle },
-  { id: 16, label: "৫% ক্যাশব্যাক", Icon: Percent },
-  { id: 17, label: "মাইডেজার", Icon: LayoutDashboard },
-  { id: 18, label: "জব লোকেশন", Icon: MapPin },
-  { id: 19, label: "বিনিয়োগ", Icon: BarChart2 },
-  { id: 20, label: "প্রডাক্ট বিক্রি করুন", Icon: Tag },
-  { id: 21, label: "লোন", Icon: Banknote },
-  { id: 22, label: "ডিজিটাল সেল", Icon: Monitor },
-  { id: 23, label: "পার্টনারশিপ", Icon: Users },
-  { id: 24, label: "অনলাইন শপিং", Icon: ShoppingCart },
-  { id: 25, label: "এক ক্লিকে সাইন", Icon: MousePointerClick },
-  { id: 26, label: "ক্যাশব্যাক অর্ডার সেল", Icon: Receipt },
-  { id: 27, label: "আর্থিক প্রডাক্ট", Icon: CreditCard },
-  { id: 28, label: "মার্কেটিং প্রডাক্ট", Icon: Megaphone },
-  { id: 29, label: "দৈনিক ইনকাম", Icon: CalendarDays },
-  { id: 30, label: "অনলাইন নাচিড", Icon: Globe },
+  {
+    id: 1,
+    label:
+      "\u09b0\u09bf\u09b8\u09c7\u09b2\u09bf\u0982 \u09aa\u09cd\u09b0\u09a1\u09be\u0995\u09cd\u099f",
+    emoji: "\uD83D\uDED8",
+    bg: COLORS[0],
+    action: "resellerProducts",
+  },
+  {
+    id: 2,
+    label:
+      "\u09ae\u09cb\u09ac\u09be\u0987\u09b2 \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u099c",
+    emoji: "\uD83D\uDCF1",
+    bg: COLORS[1],
+    action: "recharge",
+  },
+  {
+    id: 3,
+    label:
+      "\u09a8\u09bf\u09af\u09bc\u09cb\u0997 \u09ac\u09bf\u099c\u09cd\u099e\u09aa\u09cd\u09a4\u09bf",
+    emoji: "\uD83D\uDCCB",
+    bg: COLORS[2],
+    action: "jobNotice",
+  },
+  {
+    id: 4,
+    label: "\u099f\u09be\u0995\u09be \u09aa\u09be\u09a0\u09be\u09a8",
+    emoji: "\uD83D\uDCB8",
+    bg: COLORS[3],
+    action: "service",
+  },
+  {
+    id: 5,
+    label: "\u09ac\u09bf\u09b2 \u09aa\u09c7\u09ae\u09c7\u09a8\u09cd\u099f",
+    emoji: "\uD83D\uDCA1",
+    bg: COLORS[4],
+    action: "service",
+  },
+  {
+    id: 6,
+    label: "\u0995\u09c7\u09a8\u09be\u0995\u09be\u099f\u09be",
+    emoji: "\uD83D\uDED2",
+    bg: COLORS[5],
+    action: "resellerProducts",
+  },
+  {
+    id: 7,
+    label:
+      "\u0985\u09b0\u09cd\u09a1\u09be\u09b0 \u099f\u09cd\u09b0\u09cd\u09af\u09be\u0995",
+    emoji: "\uD83D\uDCE6",
+    bg: COLORS[6],
+    action: "order",
+  },
+  {
+    id: 8,
+    label:
+      "\u09ac\u09cd\u09af\u09be\u09b2\u09c7\u09a8\u09cd\u09b8 \u099a\u09c7\u0995",
+    emoji: "\uD83D\uDCB0",
+    bg: COLORS[0],
+    action: "balance",
+  },
+  {
+    id: 9,
+    label: "\u09b0\u09bf\u09b8\u09c7\u09b2\u09be\u09b0 \u09b9\u09cb\u09a8",
+    emoji: "\uD83D\uDC64",
+    bg: COLORS[1],
+    action: "reseller",
+  },
+  {
+    id: 10,
+    label: "\u0986\u09ae\u09be\u09b0 \u0985\u09b0\u09cd\u09a1\u09be\u09b0",
+    emoji: "\uD83D\uDCCB",
+    bg: COLORS[2],
+    action: "order",
+  },
+  {
+    id: 11,
+    label: "\u09ab\u09cd\u09af\u09be\u09b6\u09a8",
+    emoji: "\uD83D\uDC57",
+    bg: COLORS[3],
+    action: "resellerProducts",
+  },
+  {
+    id: 12,
+    label:
+      "\u0987\u09b2\u09c7\u0995\u099f\u09cd\u09b0\u09a8\u09bf\u0995\u09cd\u09b8",
+    emoji: "\uD83D\uDCDF",
+    bg: COLORS[4],
+    action: "resellerProducts",
+  },
+  {
+    id: 13,
+    label: "\u099f\u09bf-\u09b6\u09be\u09b0\u09cd\u099f",
+    emoji: "\uD83D\uDC55",
+    bg: COLORS[5],
+    action: "resellerProducts",
+  },
+  {
+    id: 14,
+    label: "\u09ae\u09cb\u09ac\u09be\u0987\u09b2 \u09ab\u09cb\u09a8",
+    emoji: "\uD83D\uDCF2",
+    bg: COLORS[6],
+    action: "resellerProducts",
+  },
+  {
+    id: 15,
+    label: "\u09b9\u09c7\u09a1\u09ab\u09cb\u09a8",
+    emoji: "\uD83C\uDFA7",
+    bg: COLORS[0],
+    action: "resellerProducts",
+  },
+  {
+    id: 16,
+    label: "\u098f\u0995\u09b8\u09c7\u09b8\u09b0\u09bf\u099c",
+    emoji: "\uD83D\uDD0C",
+    bg: COLORS[1],
+    action: "resellerProducts",
+  },
+  {
+    id: 17,
+    label: "\u09ab\u09c7\u09b8\u09ac\u09c1\u0995 \u09b2\u09bf\u0982\u0995",
+    emoji: "\uD83D\uDCD8",
+    bg: COLORS[2],
+    action: "facebook",
+  },
+  {
+    id: 18,
+    label: "\u0987\u0989\u099f\u09bf\u0989\u09ac",
+    emoji: "\uD83C\uDFAC",
+    bg: COLORS[3],
+    action: "youtube",
+  },
+  {
+    id: 19,
+    label: "\u099f\u09c7\u09b2\u09c7\u0997\u09cd\u09b0\u09be\u09ae",
+    emoji: "\u2708\uFE0F",
+    bg: COLORS[4],
+    action: "telegram",
+  },
+  {
+    id: 20,
+    label: "\u09b8\u09be\u09aa\u09cb\u09b0\u09cd\u099f",
+    emoji: "\uD83C\uDFAF",
+    bg: COLORS[5],
+    action: "service",
+  },
+  {
+    id: 21,
+    label:
+      "\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a1\u09be\u0995\u09cd\u099f",
+    emoji: "\uD83C\uDD95",
+    bg: COLORS[6],
+    action: "resellerProducts",
+  },
+  {
+    id: 22,
+    label: "\u0985\u09ab\u09be\u09b0",
+    emoji: "\uD83C\uDFF7\uFE0F",
+    bg: COLORS[0],
+    action: "service",
+  },
+  {
+    id: 23,
+    label: "\u0989\u0987\u09a5\u09a1\u09cd\u09b0",
+    emoji: "\uD83C\uDFE6",
+    bg: COLORS[1],
+    action: "service",
+  },
+  {
+    id: 24,
+    label: "\u099f\u09aa \u0986\u09aa",
+    emoji: "\u2795",
+    bg: COLORS[2],
+    action: "service",
+  },
+  {
+    id: 25,
+    label: "\u09b0\u09c7\u09ab\u09be\u09b0 \u0995\u09b0\u09c1\u09a8",
+    emoji: "\uD83E\uDD1D",
+    bg: COLORS[3],
+    action: "service",
+  },
+  {
+    id: 26,
+    label:
+      "\u09a1\u09c7\u09b2\u09bf\u09ad\u09be\u09b0\u09bf \u099f\u09cd\u09b0\u09cd\u09af\u09be\u0995",
+    emoji: "\uD83D\uDE9A",
+    bg: COLORS[4],
+    action: "order",
+  },
+  {
+    id: 27,
+    label:
+      "\u09b0\u09bf\u099f\u09be\u09b0\u09cd\u09a8 \u09aa\u09b2\u09bf\u09b8\u09bf",
+    emoji: "\uD83D\uDCC4",
+    bg: COLORS[5],
+    action: "service",
+  },
+  {
+    id: 28,
+    label:
+      "\u09aa\u09c7\u09ae\u09c7\u09a8\u09cd\u099f \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf",
+    emoji: "\uD83D\uDCB3",
+    bg: COLORS[6],
+    action: "service",
+  },
+  {
+    id: 29,
+    label:
+      "\u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09b8\u09ae\u09cd\u09aa\u09b0\u09cd\u0995\u09c7",
+    emoji: "\u2139\uFE0F",
+    bg: COLORS[0],
+    action: "service",
+  },
+  {
+    id: 30,
+    label: "\u09b2\u0997 \u0986\u0989\u099f",
+    emoji: "\uD83D\uDEAA",
+    bg: COLORS[1],
+    action: "logout",
+  },
 ];
 
 interface ServiceGridProps {
   onServiceClick: (name: string) => void;
+  resellerId: bigint | null;
+  onLogout?: () => void;
 }
 
-export function ServiceGrid({ onServiceClick }: ServiceGridProps) {
+export function ServiceGrid({ onServiceClick, onLogout }: ServiceGridProps) {
+  const handleClick = (service: ServiceButton) => {
+    if (service.action === "logout") {
+      onLogout?.();
+      return;
+    }
+    if (service.action === "facebook") {
+      window.open("https://www.facebook.com", "_blank");
+      return;
+    }
+    if (service.action === "youtube") {
+      window.open("https://www.youtube.com", "_blank");
+      return;
+    }
+    if (service.action === "telegram") {
+      window.open("https://t.me", "_blank");
+      return;
+    }
+    onServiceClick(
+      service.action !== "service" ? service.action : service.label,
+    );
+  };
+
   return (
     <div className="mx-3 bg-card rounded-xl p-3 shadow-card">
-      <h3 className="text-foreground font-bold text-sm mb-3">আমাদের সেবাসমূহ</h3>
+      <h3 className="text-foreground font-bold text-sm mb-3 font-bengali">
+        আমাদের সেবাসমূহ
+      </h3>
       <div className="grid grid-cols-5 gap-2">
         {services.map((service) => (
           <button
-            key={service.id}
+            key={`svc-${service.id}`}
             type="button"
-            onClick={() => onServiceClick(service.label)}
+            onClick={() => handleClick(service)}
             className="flex flex-col items-center gap-1 p-2 bg-background rounded-xl shadow-card hover:shadow-elevated transition-smooth active:scale-95 group"
             data-ocid={`service.item.${service.id}`}
           >
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center transition-smooth group-hover:scale-110"
-              style={{ backgroundColor: "rgba(46,125,50,0.1)" }}
+              style={{ backgroundColor: `${service.bg}22` }}
             >
-              <service.Icon size={18} style={{ color: "#2e7d32" }} />
+              <span
+                className="text-xl leading-none"
+                style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.2))" }}
+              >
+                {service.emoji}
+              </span>
             </div>
             <span
-              className="text-foreground text-center leading-tight font-medium"
+              className="text-foreground text-center leading-tight font-semibold font-bengali w-full"
               style={{ fontSize: "9px" }}
             >
               {service.label}

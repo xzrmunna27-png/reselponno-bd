@@ -79,6 +79,8 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
+        "card-hover": "0 4px 12px rgba(0, 0, 0, 0.1)",
+        "input-focus": "0 0 0 3px rgba(46, 125, 50, 0.1)",
       },
       keyframes: {
         "accordion-down": {
@@ -89,10 +91,20 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "carousel-slide": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "carousel-slide": "carousel-slide 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+        "fade-in": "fade-in 0.3s ease-out",
       },
     },
   },

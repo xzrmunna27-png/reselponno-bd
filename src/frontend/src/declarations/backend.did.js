@@ -8,10 +8,394 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const JobNoticeId = IDL.Nat;
+export const JobNotice = IDL.Record({
+  'id' : JobNoticeId,
+  'title' : IDL.Text,
+  'salary' : IDL.Text,
+  'description' : IDL.Text,
+  'deadline' : IDL.Text,
+  'isActive' : IDL.Bool,
+  'company' : IDL.Text,
+  'location' : IDL.Text,
+});
+export const ProductCategory = IDL.Variant({
+  'fashion' : IDL.Null,
+  'electronics' : IDL.Null,
+});
+export const ProductId = IDL.Nat;
+export const Product = IDL.Record({
+  'id' : ProductId,
+  'originalPrice' : IDL.Nat,
+  'resellerPrice' : IDL.Nat,
+  'name' : IDL.Text,
+  'description' : IDL.Text,
+  'isActive' : IDL.Bool,
+  'imageEmoji' : IDL.Text,
+  'sizes' : IDL.Vec(IDL.Text),
+  'stock' : IDL.Nat,
+  'category' : ProductCategory,
+});
+export const OrderId = IDL.Nat;
+export const OrderStatus = IDL.Variant({
+  'shipped' : IDL.Null,
+  'cancelled' : IDL.Null,
+  'pending' : IDL.Null,
+  'delivered' : IDL.Null,
+  'confirmed' : IDL.Null,
+});
+export const Timestamp = IDL.Int;
+export const ResellerId = IDL.Nat;
+export const Order = IDL.Record({
+  'id' : OrderId,
+  'customerName' : IDL.Text,
+  'status' : OrderStatus,
+  'customerPhone' : IDL.Text,
+  'createdAt' : Timestamp,
+  'size' : IDL.Text,
+  'productId' : ProductId,
+  'customerAddress' : IDL.Text,
+  'resellerId' : ResellerId,
+  'quantity' : IDL.Nat,
+  'totalPrice' : IDL.Nat,
+  'location' : IDL.Text,
+});
+export const RechargeId = IDL.Nat;
+export const RechargeStatus = IDL.Variant({
+  'pending' : IDL.Null,
+  'completed' : IDL.Null,
+  'failed' : IDL.Null,
+});
+export const RechargeOperator = IDL.Variant({
+  'banglalink' : IDL.Null,
+  'grameenphone' : IDL.Null,
+  'robi' : IDL.Null,
+  'airtel' : IDL.Null,
+  'teletalk' : IDL.Null,
+});
+export const MobileRecharge = IDL.Record({
+  'id' : RechargeId,
+  'status' : RechargeStatus,
+  'operator' : RechargeOperator,
+  'createdAt' : Timestamp,
+  'phone' : IDL.Text,
+  'amount' : IDL.Nat,
+});
+export const Reseller = IDL.Record({
+  'id' : ResellerId,
+  'totalOrders' : IDL.Nat,
+  'name' : IDL.Text,
+  'joinedAt' : Timestamp,
+  'isActive' : IDL.Bool,
+  'email' : IDL.Text,
+  'address' : IDL.Text,
+  'totalEarnings' : IDL.Nat,
+  'phone' : IDL.Text,
+});
+export const CategoryFilter = IDL.Variant({
+  'all' : IDL.Null,
+  'fashion' : IDL.Null,
+  'electronics' : IDL.Null,
+});
+export const BalanceTransaction = IDL.Record({
+  'createdAt' : Timestamp,
+  'description' : IDL.Text,
+  'amount' : IDL.Int,
+});
+export const ResellerBalance = IDL.Record({
+  'balance' : IDL.Int,
+  'resellerId' : ResellerId,
+  'transactions' : IDL.Vec(BalanceTransaction),
+});
+
+export const idlService = IDL.Service({
+  'adminAddJobNotice' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [JobNotice],
+      [],
+    ),
+  'adminAddProduct' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        ProductCategory,
+        IDL.Nat,
+        IDL.Nat,
+        IDL.Vec(IDL.Text),
+        IDL.Nat,
+        IDL.Text,
+        IDL.Text,
+      ],
+      [Product],
+      [],
+    ),
+  'adminDeactivateJobNotice' : IDL.Func(
+      [IDL.Text, JobNoticeId],
+      [IDL.Bool],
+      [],
+    ),
+  'adminDeleteProduct' : IDL.Func([IDL.Text, ProductId], [IDL.Bool], []),
+  'adminEditProduct' : IDL.Func(
+      [
+        IDL.Text,
+        ProductId,
+        IDL.Text,
+        ProductCategory,
+        IDL.Nat,
+        IDL.Nat,
+        IDL.Vec(IDL.Text),
+        IDL.Nat,
+        IDL.Text,
+        IDL.Text,
+        IDL.Bool,
+      ],
+      [IDL.Bool],
+      [],
+    ),
+  'adminGetAllOrders' : IDL.Func([IDL.Text], [IDL.Vec(Order)], ['query']),
+  'adminGetAllRecharges' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(MobileRecharge)],
+      ['query'],
+    ),
+  'adminGetAllResellers' : IDL.Func([IDL.Text], [IDL.Vec(Reseller)], ['query']),
+  'adminLogin' : IDL.Func([IDL.Text], [IDL.Bool], ['query']),
+  'adminUpdateOrderStatus' : IDL.Func(
+      [IDL.Text, OrderId, OrderStatus],
+      [IDL.Bool],
+      [],
+    ),
+  'createResellerAccount' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [Reseller],
+      [],
+    ),
+  'getJobNotices' : IDL.Func([], [IDL.Vec(JobNotice)], ['query']),
+  'getOrders' : IDL.Func([], [IDL.Vec(Order)], ['query']),
+  'getOrdersByReseller' : IDL.Func([ResellerId], [IDL.Vec(Order)], ['query']),
+  'getProductById' : IDL.Func([ProductId], [IDL.Opt(Product)], ['query']),
+  'getProducts' : IDL.Func([CategoryFilter], [IDL.Vec(Product)], ['query']),
+  'getResellerBalance' : IDL.Func([ResellerId], [ResellerBalance], ['query']),
+  'getResellerById' : IDL.Func([ResellerId], [IDL.Opt(Reseller)], ['query']),
+  'placeOrder' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        ProductId,
+        IDL.Text,
+        IDL.Nat,
+        ResellerId,
+      ],
+      [Order],
+      [],
+    ),
+  'searchProducts' : IDL.Func([IDL.Text], [IDL.Vec(Product)], ['query']),
+  'submitRecharge' : IDL.Func(
+      [IDL.Text, RechargeOperator, IDL.Nat],
+      [MobileRecharge],
+      [],
+    ),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const JobNoticeId = IDL.Nat;
+  const JobNotice = IDL.Record({
+    'id' : JobNoticeId,
+    'title' : IDL.Text,
+    'salary' : IDL.Text,
+    'description' : IDL.Text,
+    'deadline' : IDL.Text,
+    'isActive' : IDL.Bool,
+    'company' : IDL.Text,
+    'location' : IDL.Text,
+  });
+  const ProductCategory = IDL.Variant({
+    'fashion' : IDL.Null,
+    'electronics' : IDL.Null,
+  });
+  const ProductId = IDL.Nat;
+  const Product = IDL.Record({
+    'id' : ProductId,
+    'originalPrice' : IDL.Nat,
+    'resellerPrice' : IDL.Nat,
+    'name' : IDL.Text,
+    'description' : IDL.Text,
+    'isActive' : IDL.Bool,
+    'imageEmoji' : IDL.Text,
+    'sizes' : IDL.Vec(IDL.Text),
+    'stock' : IDL.Nat,
+    'category' : ProductCategory,
+  });
+  const OrderId = IDL.Nat;
+  const OrderStatus = IDL.Variant({
+    'shipped' : IDL.Null,
+    'cancelled' : IDL.Null,
+    'pending' : IDL.Null,
+    'delivered' : IDL.Null,
+    'confirmed' : IDL.Null,
+  });
+  const Timestamp = IDL.Int;
+  const ResellerId = IDL.Nat;
+  const Order = IDL.Record({
+    'id' : OrderId,
+    'customerName' : IDL.Text,
+    'status' : OrderStatus,
+    'customerPhone' : IDL.Text,
+    'createdAt' : Timestamp,
+    'size' : IDL.Text,
+    'productId' : ProductId,
+    'customerAddress' : IDL.Text,
+    'resellerId' : ResellerId,
+    'quantity' : IDL.Nat,
+    'totalPrice' : IDL.Nat,
+    'location' : IDL.Text,
+  });
+  const RechargeId = IDL.Nat;
+  const RechargeStatus = IDL.Variant({
+    'pending' : IDL.Null,
+    'completed' : IDL.Null,
+    'failed' : IDL.Null,
+  });
+  const RechargeOperator = IDL.Variant({
+    'banglalink' : IDL.Null,
+    'grameenphone' : IDL.Null,
+    'robi' : IDL.Null,
+    'airtel' : IDL.Null,
+    'teletalk' : IDL.Null,
+  });
+  const MobileRecharge = IDL.Record({
+    'id' : RechargeId,
+    'status' : RechargeStatus,
+    'operator' : RechargeOperator,
+    'createdAt' : Timestamp,
+    'phone' : IDL.Text,
+    'amount' : IDL.Nat,
+  });
+  const Reseller = IDL.Record({
+    'id' : ResellerId,
+    'totalOrders' : IDL.Nat,
+    'name' : IDL.Text,
+    'joinedAt' : Timestamp,
+    'isActive' : IDL.Bool,
+    'email' : IDL.Text,
+    'address' : IDL.Text,
+    'totalEarnings' : IDL.Nat,
+    'phone' : IDL.Text,
+  });
+  const CategoryFilter = IDL.Variant({
+    'all' : IDL.Null,
+    'fashion' : IDL.Null,
+    'electronics' : IDL.Null,
+  });
+  const BalanceTransaction = IDL.Record({
+    'createdAt' : Timestamp,
+    'description' : IDL.Text,
+    'amount' : IDL.Int,
+  });
+  const ResellerBalance = IDL.Record({
+    'balance' : IDL.Int,
+    'resellerId' : ResellerId,
+    'transactions' : IDL.Vec(BalanceTransaction),
+  });
+  
+  return IDL.Service({
+    'adminAddJobNotice' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [JobNotice],
+        [],
+      ),
+    'adminAddProduct' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          ProductCategory,
+          IDL.Nat,
+          IDL.Nat,
+          IDL.Vec(IDL.Text),
+          IDL.Nat,
+          IDL.Text,
+          IDL.Text,
+        ],
+        [Product],
+        [],
+      ),
+    'adminDeactivateJobNotice' : IDL.Func(
+        [IDL.Text, JobNoticeId],
+        [IDL.Bool],
+        [],
+      ),
+    'adminDeleteProduct' : IDL.Func([IDL.Text, ProductId], [IDL.Bool], []),
+    'adminEditProduct' : IDL.Func(
+        [
+          IDL.Text,
+          ProductId,
+          IDL.Text,
+          ProductCategory,
+          IDL.Nat,
+          IDL.Nat,
+          IDL.Vec(IDL.Text),
+          IDL.Nat,
+          IDL.Text,
+          IDL.Text,
+          IDL.Bool,
+        ],
+        [IDL.Bool],
+        [],
+      ),
+    'adminGetAllOrders' : IDL.Func([IDL.Text], [IDL.Vec(Order)], ['query']),
+    'adminGetAllRecharges' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(MobileRecharge)],
+        ['query'],
+      ),
+    'adminGetAllResellers' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(Reseller)],
+        ['query'],
+      ),
+    'adminLogin' : IDL.Func([IDL.Text], [IDL.Bool], ['query']),
+    'adminUpdateOrderStatus' : IDL.Func(
+        [IDL.Text, OrderId, OrderStatus],
+        [IDL.Bool],
+        [],
+      ),
+    'createResellerAccount' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [Reseller],
+        [],
+      ),
+    'getJobNotices' : IDL.Func([], [IDL.Vec(JobNotice)], ['query']),
+    'getOrders' : IDL.Func([], [IDL.Vec(Order)], ['query']),
+    'getOrdersByReseller' : IDL.Func([ResellerId], [IDL.Vec(Order)], ['query']),
+    'getProductById' : IDL.Func([ProductId], [IDL.Opt(Product)], ['query']),
+    'getProducts' : IDL.Func([CategoryFilter], [IDL.Vec(Product)], ['query']),
+    'getResellerBalance' : IDL.Func([ResellerId], [ResellerBalance], ['query']),
+    'getResellerById' : IDL.Func([ResellerId], [IDL.Opt(Reseller)], ['query']),
+    'placeOrder' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          ProductId,
+          IDL.Text,
+          IDL.Nat,
+          ResellerId,
+        ],
+        [Order],
+        [],
+      ),
+    'searchProducts' : IDL.Func([IDL.Text], [IDL.Vec(Product)], ['query']),
+    'submitRecharge' : IDL.Func(
+        [IDL.Text, RechargeOperator, IDL.Nat],
+        [MobileRecharge],
+        [],
+      ),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };

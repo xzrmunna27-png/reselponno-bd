@@ -11,21 +11,21 @@
 
     /* Light mode: white background, professional palette */
     --background: 0.99 0.002 0;
-    --foreground: 0.15 0.008 0;
+    --foreground: 0.12 0.01 180;
     --card: 1.0 0 0;
-    --card-foreground: 0.15 0.008 0;
+    --card-foreground: 0.12 0.01 180;
     --popover: 1.0 0 0;
-    --popover-foreground: 0.15 0.008 0;
+    --popover-foreground: 0.12 0.01 180;
 
     /* Primary: Green #2e7d32 → OKLCH(0.52 0.18 145) */
     --primary: 0.52 0.18 145;
     --primary-foreground: 0.98 0.002 0;
 
     /* Secondary: Muted green */
-    --secondary: 0.92 0.008 145;
-    --secondary-foreground: 0.25 0.01 145;
-    --muted: 0.94 0.005 0;
-    --muted-foreground: 0.5 0.005 0;
+    --secondary: 0.65 0.18 55;
+    --secondary-foreground: 0.15 0.008 0;
+    --muted: 0.93 0.003 0;
+    --muted-foreground: 0.48 0.005 0;
 
     /* Accent: Red #c0392b → OKLCH(0.48 0.22 20) */
     --accent: 0.48 0.22 20;
@@ -36,24 +36,24 @@
     --destructive-foreground: 0.98 0.002 0;
 
     /* Borders and inputs */
-    --border: 0.92 0.004 0;
-    --input: 0.94 0.004 0;
+    --border: 0.9 0.004 0;
+    --input: 0.96 0.003 0;
     --ring: 0.52 0.18 145;
 
     /* Chart colors */
     --chart-1: 0.52 0.18 145;
     --chart-2: 0.48 0.22 20;
-    --chart-3: 0.65 0.15 85;
+    --chart-3: 0.65 0.18 55;
     --chart-4: 0.6 0.12 40;
     --chart-5: 0.55 0.1 175;
 
     /* Sidebar (green-tinted) */
-    --sidebar: 0.96 0.004 145;
-    --sidebar-foreground: 0.15 0.008 0;
+    --sidebar: 0.96 0.005 145;
+    --sidebar-foreground: 0.12 0.01 180;
     --sidebar-primary: 0.52 0.18 145;
     --sidebar-primary-foreground: 0.98 0.002 0;
-    --sidebar-accent: 0.92 0.008 145;
-    --sidebar-accent-foreground: 0.25 0.01 145;
+    --sidebar-accent: 0.65 0.18 55;
+    --sidebar-accent-foreground: 0.15 0.008 0;
     --sidebar-border: 0.9 0.005 145;
     --sidebar-ring: 0.52 0.18 145;
   }
@@ -68,6 +68,25 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display font-bold;
+}
+
+button {
+  @apply transition-smooth;
+}
+
+input,
+textarea,
+select {
+  @apply rounded-md border border-input bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
 }
 
 @font-face {
@@ -94,4 +113,60 @@
   .shadow-elevated {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
+}
+
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    oklch(var(--primary)) 0%,
+    oklch(var(--secondary)) 100%
+  );
+}
+
+.gradient-accent {
+  background: linear-gradient(
+    135deg,
+    oklch(var(--accent)) 0%,
+    oklch(var(--destructive) / 0.8) 100%
+  );
+}
+
+.btn-primary {
+  @apply px-4 py-2 rounded-md bg-primary text-primary-foreground font-semibold transition-smooth hover:opacity-90 active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 rounded-md border-2 border-primary text-primary bg-transparent font-semibold transition-smooth hover:bg-primary hover:text-primary-foreground;
+}
+
+.btn-accent {
+  @apply px-4 py-2 rounded-md bg-accent text-accent-foreground font-semibold transition-smooth hover:opacity-90 active:scale-95;
+}
+
+.card-bordered {
+  @apply bg-card shadow-card border border-border rounded-lg;
+}
+
+.badge-success {
+  @apply inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-semibold;
+}
+
+.badge-warning {
+  @apply inline-block px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-semibold;
+}
+
+.text-high-contrast {
+  @apply font-bold text-foreground;
+}
+
+.font-bengali {
+  font-family: "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", system-ui,
+    sans-serif;
+  font-weight: 600;
+  line-height: 1.7;
+  color: oklch(var(--foreground));
+}
+
+.shadow-subtle {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }

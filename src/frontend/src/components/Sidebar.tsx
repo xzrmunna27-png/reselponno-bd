@@ -1,3 +1,4 @@
+import type { ResellerSession } from "@/types";
 import {
   Bell,
   HelpCircle,
@@ -14,6 +15,8 @@ import {
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onLogout: () => void;
+  reseller: ResellerSession | null;
 }
 
 const menuItems = [
@@ -25,10 +28,9 @@ const menuItems = [
   { label: "নোটিফিকেশন", Icon: Bell },
   { label: "সেটিংস", Icon: Settings },
   { label: "সাহায্য", Icon: HelpCircle },
-  { label: "লগ আউট", Icon: LogOut },
 ];
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, onLogout, reseller }: SidebarProps) {
   return (
     <>
       {/* Backdrop */}
@@ -55,7 +57,37 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           className="flex items-center justify-between px-4 py-3"
           style={{ backgroundColor: "#2e7d32" }}
         >
-          <span className="text-white font-bold text-sm">RESELPONNO</span>
+          <div className="flex items-center gap-2">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 36 36"
+              fill="none"
+              role="img"
+              aria-label="লোগো"
+            >
+              <title>রিসেলপন্নো বিডি লোগো</title>
+              <rect width="36" height="36" rx="8" fill="#1b5e20" />
+              <path
+                d="M18 4L30 9V18C30 24.627 24.627 30 18 32C11.373 30 6 24.627 6 18V9L18 4Z"
+                fill="#1b5e20"
+                stroke="#c0b86b"
+                strokeWidth="1.5"
+              />
+              <text
+                x="18"
+                y="23"
+                textAnchor="middle"
+                fill="#c0b86b"
+                fontSize="14"
+                fontWeight="900"
+                fontFamily="Arial,sans-serif"
+              >
+                R
+              </text>
+            </svg>
+            <span className="text-white font-bold text-xs">রিসেলপন্নো বিডি</span>
+          </div>
           <button
             type="button"
             onClick={onClose}
@@ -74,13 +106,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
               style={{ backgroundColor: "#2e7d32" }}
             >
-              R
+              {reseller ? reseller.name[0].toUpperCase() : "R"}
             </div>
             <div>
               <p className="text-foreground font-semibold text-sm">
-                রিসেলার ব্যবহারকারী
+                {reseller ? reseller.name : "রিসেলার ব্যবহারকারী"}
               </p>
-              <p className="text-muted-foreground text-xs">ব্যালেন্স: ৳ ০.০০</p>
+              <p className="text-muted-foreground text-xs">
+                {reseller ? reseller.phone : "ব্যালেন্স: ৳ ০.০০"}
+              </p>
             </div>
           </div>
         </div>
@@ -99,6 +133,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <span>{label}</span>
             </button>
           ))}
+          <button
+            type="button"
+            onClick={onLogout}
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted transition-smooth"
+            data-ocid="sidebar.logout_button"
+          >
+            <LogOut size={18} style={{ color: "#c0392b" }} />
+            <span style={{ color: "#c0392b" }}>লগ আউট</span>
+          </button>
         </nav>
       </aside>
     </>

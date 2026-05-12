@@ -1,16 +1,20 @@
 import type { ActiveTab } from "@/types";
-import { Calendar, Home, Package, User } from "lucide-react";
 
 interface BottomNavProps {
   activeTab: ActiveTab;
   onTabChange: (tab: ActiveTab) => void;
 }
 
-const tabs: { id: ActiveTab; label: string; Icon: typeof Home }[] = [
-  { id: "home", label: "হোম", Icon: Home },
-  { id: "products", label: "নতুন প্রডাক্ট", Icon: Package },
-  { id: "daily", label: "প্রতিদিন", Icon: Calendar },
-  { id: "profile", label: "প্রোফাইল", Icon: User },
+const tabs: {
+  id: ActiveTab;
+  label: string;
+  emoji: string;
+  activeEmoji: string;
+}[] = [
+  { id: "home", label: "হোম", emoji: "🏠", activeEmoji: "🏠" },
+  { id: "products", label: "পণ্য", emoji: "🛒", activeEmoji: "🛒" },
+  { id: "daily", label: "অর্ডার", emoji: "📦", activeEmoji: "📦" },
+  { id: "profile", label: "প্রোফাইল", emoji: "👤", activeEmoji: "👤" },
 ];
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
@@ -19,7 +23,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
       className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border flex items-center"
       style={{ maxWidth: "480px", margin: "0 auto" }}
     >
-      {tabs.map(({ id, label, Icon }) => {
+      {tabs.map(({ id, label, emoji }) => {
         const isActive = activeTab === id;
         return (
           <button
@@ -29,12 +33,18 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
             className="flex-1 flex flex-col items-center gap-0.5 py-2 transition-smooth"
             data-ocid={`bottomnav.${id}_tab`}
           >
-            <Icon
-              size={20}
-              style={{ color: isActive ? "#2e7d32" : "#9ca3af" }}
-            />
             <span
-              className="font-semibold"
+              className="text-xl"
+              style={{
+                filter: isActive
+                  ? "drop-shadow(0 0 4px rgba(46,125,50,0.6))"
+                  : "grayscale(0.4) opacity(0.6)",
+              }}
+            >
+              {emoji}
+            </span>
+            <span
+              className="font-semibold font-bengali"
               style={{
                 fontSize: "10px",
                 color: isActive ? "#2e7d32" : "#9ca3af",

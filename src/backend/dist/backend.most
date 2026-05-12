@@ -1,4 +1,137 @@
 // Version: 1.0.0
+type BalanceTransaction__727194268 =
+  {amount : Int; createdAt : Timestamp__695951621; description : Text};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type JobNoticeId__1051019544 = Nat;
+type JobNotice__135883479 =
+  {
+    company : Text;
+    deadline : Text;
+    description : Text;
+    id : JobNoticeId__1051019544;
+    isActive : Bool;
+    location : Text;
+    salary : Text;
+    title : Text
+  };
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MobileRecharge__72324937 =
+  {
+    amount : Nat;
+    createdAt : Timestamp__695951621;
+    id : RechargeId__439888163;
+    operator : RechargeOperator__492984106;
+    phone : Text;
+    status : RechargeStatus__463655644
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderId__1025014451 = Nat;
+type OrderStatus__136416157 =
+  {#cancelled; #confirmed; #delivered; #pending; #shipped};
+type Order__1002413030 =
+  {
+    createdAt : Timestamp__695951621;
+    customerAddress : Text;
+    customerName : Text;
+    customerPhone : Text;
+    id : OrderId__1025014451;
+    location : Text;
+    productId : ProductId__112770645;
+    quantity : Nat;
+    resellerId : ResellerId__95791464;
+    size : Text;
+    status : OrderStatus__136416157;
+    totalPrice : Nat
+  };
+type ProductCategory__845690969 = {#electronics; #fashion};
+type ProductId__112770645 = Nat;
+type Product__541677481 =
+  {
+    category : ProductCategory__845690969;
+    description : Text;
+    id : ProductId__112770645;
+    imageEmoji : Text;
+    isActive : Bool;
+    name : Text;
+    originalPrice : Nat;
+    resellerPrice : Nat;
+    sizes : [Text];
+    stock : Nat
+  };
+type RechargeId__439888163 = Nat;
+type RechargeOperator__492984106 =
+  {#airtel; #banglalink; #grameenphone; #robi; #teletalk};
+type RechargeStatus__463655644 = {#completed; #failed; #pending};
+type ResellerBalance__264434580 =
+  {
+    balance : Int;
+    resellerId : ResellerId__95791464;
+    transactions : [BalanceTransaction__727194268]
+  };
+type ResellerId__95791464 = Nat;
+type Reseller__177254371 =
+  {
+    address : Text;
+    email : Text;
+    id : ResellerId__95791464;
+    isActive : Bool;
+    joinedAt : Timestamp__695951621;
+    name : Text;
+    phone : Text;
+    totalEarnings : Nat;
+    totalOrders : Nat
+  };
+type Timestamp__695951621 = Int;
 actor {
-  
+  stable balances :
+    {
+      var root :
+        Node__46230540<ResellerId__95791464, ResellerBalance__264434580>;
+      var size : Nat__490723111
+    };
+  stable notices :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?JobNotice__135883479]];
+      var elementIndex : Nat__490723111
+    };
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__1002413030]];
+      var elementIndex : Nat__490723111
+    };
+  stable products :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Product__541677481]];
+      var elementIndex : Nat__490723111
+    };
+  stable recharges :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MobileRecharge__72324937]];
+      var elementIndex : Nat__490723111
+    };
+  stable resellers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Reseller__177254371]];
+      var elementIndex : Nat__490723111
+    };
+  stable state :
+    {
+      var nextJobNoticeId : Nat;
+      var nextOrderId : Nat;
+      var nextProductId : Nat;
+      var nextRechargeId : Nat;
+      var nextResellerId : Nat;
+      var seeded : Bool
+    }
 };
