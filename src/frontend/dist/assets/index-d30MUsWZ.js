@@ -30779,51 +30779,92 @@ function SocialLinks() {
 }
 const slides = [
   {
-    gradient: "linear-gradient(135deg, #1a5e1f 0%, #2e7d32 50%, #388e3c 100%)",
+    gradient: "linear-gradient(135deg, #1a5e1f 0%, #2e7d32 60%, #43a047 100%)",
     headline: "বাংলাদেশের সেরা রিসেলিং প্ল্যাটফর্ম",
     sub: "হাজারো প্রোডাক্ট রিসেল করুন, ঘরে বসে আয় করুন",
-    emoji: "🛒"
+    emoji: "🛒",
+    tag: "স্বাগতম"
   },
   {
-    gradient: "linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #c0392b 100%)",
+    gradient: "linear-gradient(135deg, #b71c1c 0%, #e53935 60%, #ef5350 100%)",
     headline: "প্রতিটি অর্ডারে ৫% ক্যাশব্যাক",
     sub: "আজই শুরু করুন এবং প্রতিদিন আয় করুন",
-    emoji: "💰"
+    emoji: "💰",
+    tag: "বিশেষ অফার"
   },
   {
-    gradient: "linear-gradient(135deg, #7b4f12 0%, #c0b86b 50%, #a08030 100%)",
+    gradient: "linear-gradient(135deg, #0d47a1 0%, #1565c0 60%, #1e88e5 100%)",
     headline: "ফ্যাশন ও ইলেকট্রনিক্স প্রোডাক্ট",
     sub: "সর্বোচ্চ মানের পণ্য সবচেয়ে কম দামে",
-    emoji: "👗"
+    emoji: "👗",
+    tag: "হাজারো পণ্য"
   },
   {
-    gradient: "linear-gradient(135deg, #006064 0%, #00838f 50%, #00acc1 100%)",
+    gradient: "linear-gradient(135deg, #004d40 0%, #00695c 60%, #00897b 100%)",
     headline: "দ্রুত ও নিরাপদ ডেলিভারি",
     sub: "সারা বাংলাদেশে দ্রুততম ডেলিভারি সার্ভিস",
-    emoji: "🚚"
+    emoji: "🚚",
+    tag: "দ্রুত সেবা"
   },
   {
-    gradient: "linear-gradient(135deg, #4527a0 0%, #7b1fa2 50%, #ab47bc 100%)",
+    gradient: "linear-gradient(135deg, #4a148c 0%, #7b1fa2 60%, #ab47bc 100%)",
     headline: "নিয়োগ বিজ্ঞপ্তি ও ক্যারিয়ার",
     sub: "সেরা কোম্পানিতে চাকরির সুযোগ খুঁজুন",
-    emoji: "💼"
+    emoji: "💼",
+    tag: "নতুন সুযোগ"
   }
 ];
 const features = [
   {
     emoji: "📦",
     title: "রিসেলিং প্রোডাক্ট",
-    desc: "হাজারো পণ্য রিসেল করুন, প্রতিটি বিক্রয়ে মুনাফা অর্জন করুন"
+    desc: "হাজারো পণ্য রিসেল করুন, প্রতিটি বিক্রয়ে মুনাফা অর্জন করুন",
+    color: "#1b5e20",
+    bg: "#e8f5e9"
   },
   {
     emoji: "🚀",
     title: "দ্রুত ডেলিভারি",
-    desc: "৪৮ ঘণ্টার মধ্যে সারা বাংলাদেশে ডেলিভারি নিশ্চিত"
+    desc: "৪৮ ঘণ্টার মধ্যে সারা বাংলাদেশে ডেলিভারি নিশ্চিত",
+    color: "#0d47a1",
+    bg: "#e3f2fd"
   },
   {
     emoji: "🛡️",
     title: "বিশ্বস্ত সেবা",
-    desc: "১০০% নিরাপদ লেনদেন ও যাচাইকৃত প্রোডাক্টের গ্যারান্টি"
+    desc: "১০০% নিরাপদ লেনদেন ও যাচাইকৃত প্রোডাক্টের গ্যারান্টি",
+    color: "#6a1b9a",
+    bg: "#f3e5f5"
+  }
+];
+const whyUs = [
+  {
+    emoji: "👥",
+    value: "৫০০+",
+    label: "সক্রিয় রিসেলার",
+    color: "#c62828",
+    bg: "#ffebee"
+  },
+  {
+    emoji: "📦",
+    value: "১০০০+",
+    label: "প্রিমিয়াম প্রোডাক্ট",
+    color: "#1565c0",
+    bg: "#e3f2fd"
+  },
+  {
+    emoji: "🎧",
+    value: "২৪/৭",
+    label: "কাস্টমার সাপোর্ট",
+    color: "#6a1b9a",
+    bg: "#f3e5f5"
+  },
+  {
+    emoji: "⚡",
+    value: "৪৮ ঘন্টা",
+    label: "দ্রুত ডেলিভারি",
+    color: "#e65100",
+    bg: "#fff3e0"
   }
 ];
 const reviews = [
@@ -30831,194 +30872,431 @@ const reviews = [
     name: "মোঃ রাহিম উদ্দিন",
     location: "ঢাকা",
     text: "অসাধারণ প্ল্যাটফর্ম! মাত্র এক মাসে ১৫,০০০ টাকা আয় করেছি।",
-    stars: 5
+    stars: 5,
+    avatarColor: "#c62828"
   },
   {
     name: "নাসরিন বেগম",
     location: "চট্টগ্রাম",
     text: "খুব সহজে অর্ডার করা যায়, ডেলিভারিও দ্রুত। সত্যিই চমৎকার সেবা!",
-    stars: 5
+    stars: 5,
+    avatarColor: "#1565c0"
   },
   {
     name: "কামরুল হাসান",
     location: "সিলেট",
     text: "ক্যাশব্যাক অফার দারুণ কাজে লাগছে। প্রতিদিন ভালো আয় হচ্ছে।",
-    stars: 4
+    stars: 4,
+    avatarColor: "#6a1b9a"
   }
 ];
 function LandingPage({ onGetStarted }) {
   const [current, setCurrent] = reactExports.useState(0);
   const timerRef = reactExports.useRef(null);
   reactExports.useEffect(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setCurrent((c2) => (c2 + 1) % slides.length);
-    }, 4e3);
+    }, 4500);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
+  const slide = slides[current];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", "data-ocid": "landing.page", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "sticky top-0 z-50 bg-card border-b border-border shadow-card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "div",
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "header",
       {
-        className: "mx-auto flex items-center justify-between px-4 py-3",
-        style: { maxWidth: 480 },
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ReselponnoLogo, { size: 32 }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-bold text-sm", style: { color: "#2e7d32" }, children: "রিসেলপন্নো বিডি" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "button",
-              onClick: onGetStarted,
-              className: "btn-primary text-xs px-3 py-1.5 rounded-lg",
-              "data-ocid": "landing.login_button",
-              children: "লগইন করুন"
-            }
-          )
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex flex-col", style: { maxWidth: 480 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden", style: { height: 260 }, children: [
-        slides.map((slide) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        className: "sticky top-0 z-50 border-b shadow-sm",
+        style: { backgroundColor: "#2e7d32", borderColor: "#1b5e20" },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
-            className: "absolute inset-0 flex flex-col items-center justify-center px-6 text-center transition-opacity duration-700",
-            style: {
-              background: slide.gradient,
-              opacity: slide === slides[current] ? 1 : 0,
-              pointerEvents: slide === slides[current] ? "auto" : "none"
-            },
+            className: "mx-auto flex items-center justify-between px-4 py-3",
+            style: { maxWidth: 480 },
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-5xl mb-3", children: slide.emoji }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-white font-black text-xl leading-tight mb-2", children: slide.headline }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/85 text-sm", children: slide.sub })
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ReselponnoLogo, { size: 32 }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-black text-sm text-white tracking-wide", children: "রিসেলপন্নো বিডি" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  onClick: onGetStarted,
+                  className: "text-xs px-4 py-2 rounded-lg font-bold transition-all active:scale-95",
+                  style: {
+                    backgroundColor: "rgba(255,255,255,0.15)",
+                    color: "white",
+                    border: "1.5px solid rgba(255,255,255,0.5)"
+                  },
+                  "data-ocid": "landing.login_button",
+                  children: "লগইন করুন"
+                }
+              )
             ]
-          },
-          slide.headline
-        )),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-3 left-0 right-0 flex justify-center gap-1.5", children: slides.map((slide, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            type: "button",
-            onClick: () => setCurrent(i),
-            className: "rounded-full transition-all duration-300",
-            style: {
-              width: i === current ? 20 : 8,
-              height: 8,
-              backgroundColor: i === current ? "white" : "rgba(255,255,255,0.45)"
-            },
-            "aria-label": `স্লাইড ${i + 1}`,
-            "data-ocid": `landing.slide_dot.${i + 1}`
-          },
-          slide.headline
-        )) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-3 -mt-4 rounded-xl overflow-hidden shadow-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "img",
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex flex-col", style: { maxWidth: 480 }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
         {
-          src: "/assets/generated/hero-banner.dim_800x400.jpg",
-          alt: "Reselponno BD Hero",
-          className: "w-full object-cover",
-          style: { height: 160 }
+          className: "relative overflow-hidden",
+          style: { height: 270 },
+          "data-ocid": "landing.hero_carousel",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "absolute inset-0 flex flex-col items-center justify-center px-6 text-center",
+                style: { background: slide.gradient },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "px-3 py-1 rounded-full text-xs font-bold mb-3 tracking-wide",
+                      style: {
+                        backgroundColor: "rgba(255,255,255,0.2)",
+                        color: "white",
+                        border: "1px solid rgba(255,255,255,0.35)"
+                      },
+                      children: slide.tag
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "w-16 h-16 rounded-2xl flex items-center justify-center mb-3 shadow-lg",
+                      style: { backgroundColor: "rgba(255,255,255,0.18)" },
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-4xl", children: slide.emoji })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-white font-black text-xl leading-tight mb-2", children: slide.headline }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/85 text-sm max-w-xs leading-relaxed", children: slide.sub })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10", children: slides.map((s2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                onClick: () => {
+                  setCurrent(i);
+                  if (timerRef.current) clearInterval(timerRef.current);
+                  timerRef.current = setInterval(() => {
+                    setCurrent((c2) => (c2 + 1) % slides.length);
+                  }, 4500);
+                },
+                className: "rounded-full transition-all duration-300",
+                style: {
+                  width: i === current ? 22 : 8,
+                  height: 8,
+                  backgroundColor: i === current ? "white" : "rgba(255,255,255,0.45)"
+                },
+                "aria-label": `স্লাইড ${i + 1}`,
+                "data-ocid": `landing.slide_dot.${i + 1}`
+              },
+              s2.headline
+            )) })
+          ]
         }
-      ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "px-3 py-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-lg mb-3", style: { color: "#2e7d32" }, children: "কেন রিসেলপন্নো বিডি?" }),
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "py-3 border-b",
+          style: {
+            background: "linear-gradient(90deg, #1b5e20 0%, #2e7d32 50%, #1b5e20 100%)",
+            borderColor: "#1b5e20"
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-4 divide-x divide-white/20", children: [
+            { emoji: "👥", value: "৫০০+", label: "রিসেলার" },
+            { emoji: "📦", value: "১০০০+", label: "প্রোডাক্ট" },
+            { emoji: "🎧", value: "২৪/৭", label: "সাপোর্ট" },
+            { emoji: "⚡", value: "দ্রুত", label: "ডেলিভারি" }
+          ].map((stat) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "flex flex-col items-center py-1 px-1",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg leading-none mb-0.5", children: stat.emoji }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white font-black text-sm leading-tight", children: stat.value }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "text-xs leading-tight",
+                    style: { color: "rgba(255,255,255,0.7)" },
+                    children: stat.label
+                  }
+                )
+              ]
+            },
+            stat.label
+          )) })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "px-3 py-5 bg-background", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "w-1 h-6 rounded-full",
+              style: { backgroundColor: "#2e7d32" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-lg", style: { color: "#1b5e20" }, children: "কেন রিসেলপন্নো বিডি?" })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-3", children: features.map((f) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
-            className: "card-bordered p-4 flex items-start gap-3 rounded-xl",
+            className: "flex items-start gap-3 rounded-2xl p-4",
+            style: {
+              backgroundColor: f.bg,
+              border: `1.5px solid ${f.color}30`,
+              boxShadow: "0 1px 4px rgba(0,0,0,0.07)"
+            },
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: f.emoji }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-sm text-foreground", children: f.title }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs mt-0.5 leading-relaxed", children: f.desc })
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0",
+                  style: { backgroundColor: `${f.color}18` },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: f.emoji })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "h3",
+                  {
+                    className: "font-black text-sm mb-0.5",
+                    style: { color: f.color },
+                    children: f.title
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    className: "text-xs leading-relaxed",
+                    style: { color: `${f.color}cc` },
+                    children: f.desc
+                  }
+                )
               ] })
             ]
           },
           f.title
         )) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "px-3 py-4 bg-muted/30 mx-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-lg mb-3", style: { color: "#2e7d32" }, children: "গ্রাহকদের মতামত" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-3", children: reviews.map((r2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-bordered p-4 rounded-xl", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "section",
+        {
+          className: "px-3 py-5",
+          style: {
+            background: "linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%)",
+            borderTop: "2px solid #c8e6c9",
+            borderBottom: "2px solid #c8e6c9"
+          },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-1 h-6 rounded-full",
+                  style: { backgroundColor: "#2e7d32" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-lg", style: { color: "#1b5e20" }, children: "কেন আমাদের বেছে নেবেন?" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 gap-3", children: whyUs.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "div",
               {
-                className: "w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs",
-                style: { backgroundColor: "#2e7d32" },
-                children: r2.name[0]
+                className: "rounded-2xl p-3 text-center",
+                style: {
+                  backgroundColor: item.bg,
+                  border: `1.5px solid ${item.color}30`,
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.07)"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-2xl mb-1", children: item.emoji }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "font-black text-lg leading-tight",
+                      style: { color: item.color },
+                      children: item.value
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "text-xs mt-0.5",
+                      style: { color: `${item.color}aa` },
+                      children: item.label
+                    }
+                  )
+                ]
+              },
+              item.label
+            )) })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "px-3 py-5 bg-background", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "w-1 h-6 rounded-full",
+              style: { backgroundColor: "#2e7d32" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-lg", style: { color: "#1b5e20" }, children: "গ্রাহকদের মতামত" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-3", children: reviews.map((r2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "rounded-2xl p-4",
+            style: {
+              backgroundColor: "#ffffff",
+              border: "1.5px solid #e8e8e8",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-base flex-shrink-0",
+                    style: { backgroundColor: r2.avatarColor },
+                    children: r2.name[0]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "p",
+                    {
+                      className: "font-bold text-sm leading-tight",
+                      style: { color: "#212121" },
+                      children: r2.name
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs", style: { color: "#757575" }, children: r2.location })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-0.5 flex-shrink-0", children: Array.from({ length: 5 }).map((_2, si) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    style: {
+                      fontSize: 14,
+                      color: si < r2.stars ? "#f9a825" : "#e0e0e0"
+                    },
+                    children: "★"
+                  },
+                  `star-${r2.name}-${si}`
+                )) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative pl-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "absolute left-0 top-0 font-black text-2xl leading-none",
+                    style: { color: "#c8e6c9" },
+                    children: "“"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    className: "text-xs leading-relaxed",
+                    style: { color: "#424242" },
+                    children: r2.text
+                  }
+                )
+              ] })
+            ]
+          },
+          r2.name
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "section",
+        {
+          className: "px-3 py-8 text-center",
+          style: {
+            background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #1b5e20 100%)"
+          },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-4xl mb-3", children: "🚀" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-xl mb-2 text-white", children: "আজই শুরু করুন!" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "text-sm mb-6 leading-relaxed",
+                style: { color: "rgba(255,255,255,0.8)" },
+                children: "হাজারো রিসেলারের সাথে যোগ দিন এবং আয় শুরু করুন"
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-xs text-foreground", children: r2.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "p",
-                {
-                  className: "text-muted-foreground",
-                  style: { fontSize: 10 },
-                  children: r2.location
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-auto flex", children: Array.from({ length: r2.stars }).map((_2, si) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "span",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
               {
-                className: "text-yellow-500",
-                style: { fontSize: 12 },
-                children: "★"
-              },
-              `star-${r2.name}-${si}`
-            )) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground text-xs leading-relaxed", children: r2.text })
-        ] }, r2.name)) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "px-3 py-6 text-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-black text-xl mb-2 text-foreground", children: "আজই শুরু করুন!" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm mb-4", children: "হাজারো রিসেলারের সাথে যোগ দিন এবং আয় শুরু করুন" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            type: "button",
-            onClick: onGetStarted,
-            className: "btn-primary w-full py-3 text-base rounded-xl font-black",
-            "data-ocid": "landing.cta_button",
-            children: "এখনই শুরু করুন 🚀"
-          }
-        )
-      ] }),
+                type: "button",
+                onClick: onGetStarted,
+                className: "w-full py-3.5 text-base rounded-2xl font-black active:scale-95 transition-all",
+                style: {
+                  background: "linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%)",
+                  color: "#1b5e20",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.2)"
+                },
+                "data-ocid": "landing.cta_button",
+                children: "এখনই শুরু করুন →"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "text-xs mt-3",
+                style: { color: "rgba(255,255,255,0.6)" },
+                children: "ফ্রি রেজিস্ট্রেশন · কোনো লুকানো চার্জ নেই"
+              }
+            )
+          ]
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "footer",
         {
-          className: "px-4 py-5 border-t border-border",
-          style: { backgroundColor: "#2e7d32" },
+          className: "px-4 py-5",
+          style: {
+            backgroundColor: "#1b5e20",
+            borderTop: "2px solid #2e7d32"
+          },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center gap-2 mb-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ReselponnoLogo, { size: 24 }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white font-bold text-sm", children: "রিসেলপন্নো বিডি" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ReselponnoLogo, { size: 28 }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white font-black text-sm tracking-wide", children: "রিসেলপন্নো বিডি" })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-white/70 text-center text-xs", children: [
-              "© ",
-              (/* @__PURE__ */ new Date()).getFullYear(),
-              ". Built with love using",
-              " ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "a",
-                {
-                  href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`,
-                  target: "_blank",
-                  rel: "noreferrer",
-                  className: "underline text-white/90",
-                  children: "caffeine.ai"
-                }
-              )
-            ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center gap-4 mb-3", children: ["সম্পর্কে", "যোগাযোগ", "নিয়মাবলী"].map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "text-xs cursor-pointer transition-colors",
+                style: { color: "rgba(255,255,255,0.6)" },
+                children: link
+              },
+              link
+            )) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "p",
+              {
+                className: "text-center text-xs",
+                style: { color: "rgba(255,255,255,0.6)" },
+                children: [
+                  "© ",
+                  (/* @__PURE__ */ new Date()).getFullYear(),
+                  " RESELPONNO BD — সর্বস্বত্ব সংরক্ষিত"
+                ]
+              }
+            )
           ]
         }
       )
